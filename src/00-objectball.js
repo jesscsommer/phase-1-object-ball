@@ -243,4 +243,96 @@ function bigShoeRebounds(){
 
 // bigShoeRebounds expected -> Mason Plumlee --> shoe 19 --> rebounds 12
 
-console.log(bigShoeRebounds());
+// console.log(bigShoeRebounds());
+
+function mostPointsScored(){
+    let maxPointsScored = 0;
+    let maxName = "";
+
+    let game = gameObject();
+    for (let gameKey in game){
+        let teamObj = game[gameKey];
+        for (let teamKey in teamObj){
+            let data = teamObj['players']
+            for (let key in data){
+                let points = data[key]['points']
+                if (points > maxPointsScored){
+                    maxPointsScored = points;
+                    maxName = key;
+               }
+            }
+        }  
+    }
+   return maxName;
+}
+
+function winningTeam(){
+    let winningScore = 0;
+    let winningTeam = "";
+    let game = gameObject();
+    for (let gameKey in game){
+        let teamObj = game[gameKey];
+        for (let teamKey in teamObj){
+            let data = teamObj['players']
+            let teamScore = {teamName: teamObj['teamName'], points: 0}
+            for (let key in data){
+                let points = data[key]['points']
+                teamScore['points'] += points
+              } 
+            if (teamScore['points'] > winningScore){
+              winningScore = teamScore['points']
+              winningTeam = teamScore['teamName']
+            }
+             }
+           }
+      return winningTeam;
+           }  
+
+function longestName(){
+    let maxNameLength = 0;
+    let maxName = "";
+
+    let game = gameObject();
+    for (let gameKey in game){
+        let teamObj = game[gameKey];
+        for (let teamKey in teamObj){
+            let data = teamObj['players']
+            for (let key in data){
+                let charCount = key.length
+                if (key.length > maxNameLength){
+                  maxNameLength = key.length;
+                  maxName = key;
+                }
+               }
+            }
+        }   
+    return maxName;
+    }
+
+function doesLongNameStealATon(){
+    const LongName = longestName()
+    
+    let maxSteals = 0;
+    let maxName = "";
+    
+        let game = gameObject();
+        for (let gameKey in game){
+            let teamObj = game[gameKey];
+            for (let teamKey in teamObj){
+                let data = teamObj['players']
+                for (let key in data){
+                    let steals = data[key]['steals']
+                    if (steals > maxSteals){
+                        maxSteals = steals;
+                        maxName = key;
+                    }
+                }
+            } 
+        }
+    return (LongName === maxName) ? true : false
+    }
+    
+
+// get all the player's points per team 
+// sum the points per team
+// compare each team's points --> return the highest 
